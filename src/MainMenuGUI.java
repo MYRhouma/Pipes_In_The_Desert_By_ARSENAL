@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Main GUI class for the game
@@ -25,6 +26,19 @@ public class MainMenuGUI extends JFrame {
         JButton startButton = new JButton("Start Game");
         JButton optionsButton = new JButton("Options");
         JButton exitButton = new JButton("Exit");
+        
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ConfigurationGUI configGUI = new ConfigurationGUI();
+                configGUI.setVisible(true);
+            }
+        });
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         
         buttonPanel.add(startButton);
         buttonPanel.add(optionsButton);
