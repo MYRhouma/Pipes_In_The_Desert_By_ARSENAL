@@ -30,13 +30,44 @@ public class MapGUI extends JFrame {
         
         // Initialize empty grid
         for (int i = 0; i < gridSize * gridSize; i++) {
+            final int row = i / gridSize;
+            final int col = i % gridSize;
+            
             JPanel cell = new JPanel();
             cell.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+            
+            // Add mouse listener for placing elements
+            cell.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    handleCellClick(row, col, e);
+                }
+            });
+            
             mapPanel.add(cell);
         }
         
         // Add map panel to frame
-        add(mapPanel);
+        add(mapPanel, BorderLayout.CENTER);
+        
+        // Add toolbar for element selection
+        JPanel toolbar = new JPanel();
+        JButton pipeTool = new JButton("Pipe");
+        JButton cisternTool = new JButton("Cistern");
+        JButton springTool = new JButton("Spring");
+        JButton pumpTool = new JButton("Pump");
+        
+        toolbar.add(pipeTool);
+        toolbar.add(cisternTool);
+        toolbar.add(springTool);
+        toolbar.add(pumpTool);
+        
+        add(toolbar, BorderLayout.SOUTH);
+    }
+    
+    private void handleCellClick(int row, int col, MouseEvent e) {
+        // Will be implemented to place elements on the map
+        System.out.println("Cell clicked: " + row + ", " + col);
     }
     
     public void updateMap() {
