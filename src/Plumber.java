@@ -10,24 +10,31 @@ public class Plumber extends Player {
     
     @Override
     public void takeTurn(Game game) {
-        // Plumber turn logic will go here
+        // Reset actions at the start of turn
+        resetActions();
+        System.out.println("Plumber " + getName() + " is taking their turn");
     }
     
     public void placePipe(Game game, int x, int y) {
-        if (hasPickedUpPipe) {
+        if (hasPickedUpPipe && actionsRemaining > 0) {
             Pipe pipe = new Pipe(x, y);
-            game.addElement(pipe);
+            game.addPipe(pipe);
             hasPickedUpPipe = false;
+            actionsRemaining--;
         }
     }
     
     public void pickUpPipe() {
-        hasPickedUpPipe = true;
+        if (actionsRemaining > 0) {
+            hasPickedUpPipe = true;
+            actionsRemaining--;
+        }
     }
     
     public void repairPipe(Pipe pipe) {
-        if (pipe != null && pipe.isBroken()) {
+        if (pipe != null && pipe.isBroken() && actionsRemaining > 0) {
             pipe.setBroken(false);
+            actionsRemaining--;
         }
     }
 }

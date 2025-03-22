@@ -9,12 +9,15 @@ public class Saboteur extends Player {
     
     @Override
     public void takeTurn(Game game) {
-        // Saboteur turn logic will go here
+        // Reset actions at the start of turn
+        resetActions();
+        System.out.println("Saboteur " + getName() + " is taking their turn");
     }
     
     public void breakPipe(Pipe pipe) {
-        if (pipe != null && !pipe.isBroken()) {
+        if (pipe != null && !pipe.isBroken() && actionsRemaining > 0) {
             pipe.setBroken(true);
+            actionsRemaining--;
         }
     }
 }
